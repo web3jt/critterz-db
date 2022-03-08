@@ -2,7 +2,7 @@ const fs = require('fs')
 const sCRTZ = require('./contracts/sCRTZ')
 
 
-const TOTAL_SUPPLY = 20
+const TOTAL_SUPPLY = 4096
 
 let holders = {}
 
