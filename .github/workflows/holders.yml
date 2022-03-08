@@ -48,8 +48,6 @@ jobs:
 
       - name: Sync Holders 🚀
         run: node holders.js
-        env:
-          WEB3_PROVIDER: ${{ secrets.WEB3_PROVIDER_DEFAULT }}
 
       - name: Deploy 🚀🚀🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
