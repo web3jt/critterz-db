@@ -47,8 +47,8 @@ jobs:
       - name: Create directory 🚀
         run: mkdir dist
 
-#      - name: Sync Holders 🚀🚀
-#        run: node index.js
+      - name: Sync Holders 🚀🚀
+        run: node index.js
 
       - name: Create CNAME 🚀🚀🚀
         run: echo "holders.scrtz.people.art" > ./dist/CNAME
@@ -56,6 +56,5 @@ jobs:
       - name: Deploy 🚀🚀🚀🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
-#          commit-message: $(date +"%m/%d/%YT%H:%M:%S%p")
           branch: gh-pages
           folder: dist
