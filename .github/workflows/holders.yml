@@ -47,13 +47,13 @@ jobs:
       - name: Create directory 🚀
         run: mkdir dist
 
-      - name: Sync Holders 🚀🚀
-        run: node index.js
+#      - name: Sync Holders 🚀🚀
+#        run: node index.js
 
-      - name: Create CNAME 🚀🚀
-        run: echo "critterz-db.people.art" > ./dist/CNAME
+      - name: Create CNAME 🚀🚀🚀
+      run: echo "holders.critterz.people.art" > ./dist/CNAME
 
-      - name: Deploy 🚀🚀🚀
+      - name: Deploy 🚀🚀🚀🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           commit-message: '@${{ date "+%Y-%m-%d-%H:%M" }}'
