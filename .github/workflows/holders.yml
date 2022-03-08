@@ -6,8 +6,11 @@ on:
 #    branches:
 #      - main
 
+env:
+  WEB3_PROVIDER: ${{ secrets.WEB3_PROVIDER_DEFAULT }}
+
 jobs:
-  ci:
+  sync:
     runs-on: ${{ matrix.os }}
 
     strategy:
