@@ -56,6 +56,6 @@ jobs:
       - name: Deploy 🚀🚀🚀🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
-          commit-message: '@${{ date "%Y-%m-%d-%H:%M" }}'
+          commit-message: "@${{ date '%Y-%m-%d-%H:%M' }}"
           branch: gh-pages
           folder: dist
