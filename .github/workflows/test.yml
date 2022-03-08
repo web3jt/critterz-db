@@ -1,4 +1,4 @@
-name: Sync Holders
+name: Test
 
 on:
   workflow_dispatch:
@@ -14,8 +14,6 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         node: [ 14 ]
-
-
 
     steps:
       - name: Checkout 🛎
@@ -43,8 +41,8 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: yarn
 
-      - name: Sync Holders 🚀
-        run: node holders.js
+      - name: Test 🚀
+        run: node test.js
         env:
           WEB3_PROVIDER: ${{ secrets.WEB3_PROVIDER_DEFAULT }}
 
