@@ -1,4 +1,4 @@
-name: Test
+name: Sync Holders
 
 on:
   workflow_dispatch:
@@ -8,7 +8,6 @@ on:
 
 env:
   WEB3_PROVIDER: ${{ secrets.WEB3_PROVIDER_DEFAULT }}
-
 
 jobs:
   sync:
@@ -31,7 +30,7 @@ jobs:
 
       - name: Get yarn cache directory path 🛠
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "::set-dist name=dir::$(yarn cache dir)"
 
       - name: Cache node_modules 📦
         uses: actions/cache@v2
@@ -45,12 +44,18 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: yarn
 
-      - name: Test 🚀
-        run: node test.js
+      - name: Create directory 🚀
+        run: mkdir dist
 
-#      - name: Deploy 🚀🚀🚀
-#        uses: JamesIves/github-pages-deploy-action@v4.2.5
-#        with:
-#          commit-message: "@${{ github.sha }}"
-#          branch: gh-pages
-#          folder: dist
+#      - name: Sync Holders 🚀🚀
+#        run: node index.js
+
+      - name: Create CNAME 🚀🚀
+        run: echo "holders.critterz.people.art" > ./dist/CNAME
+
+      - name: Deploy 🚀🚀🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          commit-message: '@${{ date "+%Y-%m-%d-%H:%M" }}'
+          branch: gh-pages
+          folder: dist

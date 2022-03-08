@@ -4,10 +4,10 @@ const sCRTZ = require('./contracts/sCRTZ')
 
 const TOTAL_SUPPLY = 4096
 
-let holders = {}
+let index = {}
 
 const exist = function (account) {
-    for (const key in holders) {
+    for (const key in index) {
         if (account === key) {
             return true
         }
@@ -24,14 +24,14 @@ const fetch = async function () {
 
         if (account) {
             if (exist(account)) {
-                holders[account].push(i)
+                index[account].push(i)
             } else {
-                holders[account] = [i]
+                index[account] = [i]
             }
         }
     }
 
-    fs.writeFile('./dist/holders.json', JSON.stringify(holders), function (err) {
+    fs.writeFile('./dist/data.json', JSON.stringify(index), function (err) {
         if (err) {
             console.error(err)
         }
