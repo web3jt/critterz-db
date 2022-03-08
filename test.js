@@ -1,1 +1,1 @@
-console.log(process.env['WEB3_PROVIDER'])
+console.log(process.env['WEB3_PROVIDER'].split(':'))
