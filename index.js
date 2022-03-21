@@ -1,7 +1,7 @@
 const cp = require('child_process')
 const fs = require("fs");
 const child = cp.spawn('node', ['./child.js'], {stdio: [null, null, null, 'ipc']})
-const TOTAL_SUPPLY = 20
+const TOTAL_SUPPLY = 4096
 
 let tokenIds = []
 let holders = {}
@@ -20,7 +20,7 @@ const exist = function (account) {
 
 const fn = function (data) {
     tokenIds.push(data.tokenId)
-    console.log(data.tokenId, data.owner)
+    // console.log(data.tokenId, data.owner)
 
     if (data.owner) {
         if (exist(data.owner)) {
@@ -32,7 +32,7 @@ const fn = function (data) {
 
     // END
     if (tokenIds.length === TOTAL_SUPPLY) {
-        console.log(holders)
+        // console.log(holders)
 
         fs.writeFile('./dist/data.json', JSON.stringify(holders), function (err) {
             if (err) {
