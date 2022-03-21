@@ -1,13 +1,13 @@
-const fs = require('fs')
-const sCRTZ = require('./contracts/sCRTZ')
+const cp = require('child_process')
+const fs = require("fs");
+const child = cp.spawn('node', ['./child.js'], {stdio: [null, null, null, 'ipc']})
+const TOTAL_SUPPLY = 20
 
-
-const TOTAL_SUPPLY = 4096
-
-let index = {}
+let tokenIds = []
+let holders = {}
 
 const exist = function (account) {
-    for (const key in index) {
+    for (const key in holders) {
         if (account === key) {
             return true
         }
@@ -17,27 +17,36 @@ const exist = function (account) {
 }
 
 
-const fetch = async function () {
-    for (let i = 0; i < TOTAL_SUPPLY; i++) {
-        const account = await sCRTZ.ownerOf(i)
-        console.log(i, account)
 
-        if (account) {
-            if (exist(account)) {
-                index[account].push(i)
-            } else {
-                index[account] = [i]
-            }
+const fn = function (data) {
+    tokenIds.push(data.tokenId)
+    console.log(data.tokenId, data.owner)
+
+    if (data.owner) {
+        if (exist(data.owner)) {
+            holders[data.owner].push(data.tokenId)
+        } else {
+            holders[data.owner] = [data.tokenId]
         }
     }
 
-    fs.writeFile('./dist/data.json', JSON.stringify(index), function (err) {
-        if (err) {
-            console.error(err)
-        }
+    // END
+    if (tokenIds.length === TOTAL_SUPPLY) {
+        console.log(holders)
 
-        console.log('saved.')
-    })
+        fs.writeFile('./dist/data.json', JSON.stringify(holders), function (err) {
+            if (err) {
+                console.error(err)
+            }
+
+            console.log('saved.')
+            process.exit()
+        })
+    }
 }
 
-fetch()
+child.on('message', fn)
+
+for (let i = 0; i < TOTAL_SUPPLY; i++) {
+    child.send(i)
+}
