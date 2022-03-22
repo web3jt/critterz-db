@@ -1,15 +1,13 @@
-const {spawn} = require('child_process')
+const sPlot = require('./contracts/sPlot')
 
-const child = spawn('pwd')
+const fn = async function (tokenId) {
+    console.log(tokenId)
 
-child.on('exit', function (code, signal) {
-    console.log('child process exited with ' + `code ${code} and signal ${signal}`)
-})
+    return await sPlot.ownerOf(tokenId)
+}
 
-child.stdout.on('data', (data) => {
-    console.log(`child stdout:\n${data}`)
-})
+const main = async function () {
+    console.log(await fn(1))
+}
 
-child.stderr.on('data', (data) => {
-    console.error(`child stderr:\n${data}`)
-})
+main()

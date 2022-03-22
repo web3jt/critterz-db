@@ -48,10 +48,10 @@ jobs:
         run: mkdir dist
 
       - name: Sync Holders 🚀🚀
-        run: node index.js
+        run: node holders-sCRTZ.js
 
       - name: Create CNAME 🚀🚀🚀
-        run: echo "holders.scrtz.people.art" > ./dist/CNAME
+        run: echo "critterz-db.web3jt.com" > ./dist/CNAME
 
       - name: Deploy 🚀🚀🚀🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
